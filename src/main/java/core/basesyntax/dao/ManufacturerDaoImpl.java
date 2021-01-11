@@ -29,10 +29,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        Manufacturer newManufacturer = getAll().stream()
-                .filter(s -> s.getId().equals(manufacturer.getId()))
-                .findFirst()
-                .get();
+        Manufacturer newManufacturer = get(manufacturer.getId()).get();
         newManufacturer.setName(manufacturer.getName());
         newManufacturer.setCountry(manufacturer.getCountry());
         return newManufacturer;

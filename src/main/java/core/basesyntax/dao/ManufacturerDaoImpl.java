@@ -30,17 +30,15 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        int index = IntStream.range(0, Storage.manufacturers.size())
+    IntStream.range(0, Storage.manufacturers.size())
                 .filter(i -> Storage.manufacturers.get(i).getId().equals(manufacturer.getId()))
-                .findFirst()
-                .getAsInt();
-        Storage.manufacturers.set(index, manufacturer);
+                .forEach(i -> Storage.manufacturers.set(i, manufacturer));
         return manufacturer;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.manufacturers.remove(get(id).get());
+        return Storage.manufacturers.removeIf(m -> m.getId().equals(id));
     }
 
     @Override

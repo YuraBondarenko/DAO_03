@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,11 +10,10 @@ public class Car {
     private Manufacturer manufacturer;
     private List<Driver> drivers;
 
-    public Car(Long id, String model, Manufacturer manufacturer, List<Driver> drivers) {
-        this.id = id;
+    public Car(String model, Manufacturer manufacturer) {
         this.model = model;
         this.manufacturer = manufacturer;
-        this.drivers = drivers;
+        this.drivers = new ArrayList<>();
     }
 
     public Long getId() {

@@ -7,7 +7,6 @@ import core.basesyntax.model.Car;
 import core.basesyntax.model.Driver;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {

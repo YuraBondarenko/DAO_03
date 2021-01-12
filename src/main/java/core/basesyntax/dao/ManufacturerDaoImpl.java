@@ -5,6 +5,7 @@ import core.basesyntax.lib.Dao;
 import core.basesyntax.model.Manufacturer;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
@@ -29,15 +30,17 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        Manufacturer newManufacturer = get(manufacturer.getId()).get();
-        newManufacturer.setName(manufacturer.getName());
-        newManufacturer.setCountry(manufacturer.getCountry());
-        return newManufacturer;
+        int index = IntStream.range(0, Storage.manufacturers.size())
+                .filter(i -> Storage.manufacturers.get(i).getId().equals(manufacturer.getId()))
+                .findFirst()
+                .getAsInt();
+        Storage.manufacturers.set(index, manufacturer);
+        return manufacturer;
     }
 
     @Override
     public boolean delete(Long id) {
-        return delete(get(id).get());
+        return Storage.manufacturers.remove(get(id).get());
     }
 
     @Override

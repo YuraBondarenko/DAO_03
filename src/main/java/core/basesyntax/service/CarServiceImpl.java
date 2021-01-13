@@ -46,8 +46,7 @@ public class CarServiceImpl implements CarService {
         if (!driverService.getAll().contains(driver)) {
             driverService.create(driver);
         }
-        List<Driver> cars = new ArrayList<>();
-        cars.addAll(car.getDrivers());
+        List<Driver> cars = new ArrayList<>(car.getDrivers());
         cars.add(driver);
         car.setDrivers(cars);
         update(car);
@@ -55,8 +54,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        List<Driver> cars = new ArrayList<>();
-        cars.addAll(car.getDrivers());
+        List<Driver> cars = new ArrayList<>(car.getDrivers());
         Driver driverToRemove = cars.stream()
                 .filter(s -> s.equals(driver))
                 .findFirst()

@@ -43,24 +43,13 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void addDriverToCar(Driver driver, Car car) {
-        if (!driverService.getAll().contains(driver)) {
-            driverService.create(driver);
-        }
-        List<Driver> cars = new ArrayList<>(car.getDrivers());
-        cars.add(driver);
-        car.setDrivers(cars);
+        car.getDrivers().add(driver);
         update(car);
     }
 
     @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        List<Driver> cars = new ArrayList<>(car.getDrivers());
-        Driver driverToRemove = cars.stream()
-                .filter(s -> s.equals(driver))
-                .findFirst()
-                .get();
-        cars.remove(driverToRemove);
-        car.setDrivers(cars);
+        car.getDrivers().remove(driver);
         update(car);
     }
 

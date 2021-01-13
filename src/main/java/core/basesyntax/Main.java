@@ -7,6 +7,8 @@ import core.basesyntax.model.Manufacturer;
 import core.basesyntax.service.CarService;
 import core.basesyntax.service.DriverService;
 import core.basesyntax.service.ManufacturerService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -31,8 +33,12 @@ public class Main {
         System.out.println(carService.getAll());
         Driver barak = driverService.create(new Driver("Barak", "286"));
         Driver mahdi = driverService.create(new Driver("Mahdi", "111"));
-        hyundaiCar.setDrivers(List.of(barak, mahdi));
-        teslaCar.setDrivers(List.of(barak));
+        List<Driver> driversForHyundai = new ArrayList<>();
+        driversForHyundai.add(barak);
+        driversForHyundai.add(mahdi);
+        hyundaiCar.setDrivers(driversForHyundai);
+        List<Driver> driversForTesla = new ArrayList<>();
+        driversForTesla.add(barak);
         System.out.println(carService.getAll());
         System.out.println(carService.getAllByDriver(TESLA));
         System.out.println(driverService.getAll());

@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.lib.Dao;
 import core.basesyntax.model.Car;
-import core.basesyntax.model.Driver;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

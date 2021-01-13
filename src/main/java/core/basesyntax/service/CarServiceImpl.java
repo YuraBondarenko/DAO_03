@@ -5,16 +5,12 @@ import core.basesyntax.lib.Inject;
 import core.basesyntax.lib.Service;
 import core.basesyntax.model.Car;
 import core.basesyntax.model.Driver;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CarServiceImpl implements CarService {
     @Inject
     private CarDao carDao;
-
-    @Inject
-    private DriverService driverService;
 
     @Override
     public Car create(Car car) {

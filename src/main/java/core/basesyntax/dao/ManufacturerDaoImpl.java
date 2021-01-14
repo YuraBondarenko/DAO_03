@@ -1,13 +1,11 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.lib.Dao;
 import core.basesyntax.model.Manufacturer;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-@Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override

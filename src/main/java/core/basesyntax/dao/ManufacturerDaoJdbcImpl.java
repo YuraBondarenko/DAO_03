@@ -29,7 +29,8 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(1, Long.class));
+                Long manufacturerId = resultSet.getObject(1, Long.class);
+                manufacturer.setId(manufacturerId);
             }
             return manufacturer;
         } catch (SQLException e) {
@@ -46,7 +47,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return getManufacturer(resultSet);
+                return Optional.of(getManufacturer(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get manufacturer by id " + id, e);
@@ -64,7 +65,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
                         .prepareStatement(getAllManufacturersQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                manufacturers.add(getManufacturer(resultSet).get());
+                manufacturers.add(getManufacturer(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get any manufacturer", e);
@@ -117,12 +118,12 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
         }
     }
 
-    private Optional<Manufacturer> getManufacturer(ResultSet resultSet) throws SQLException {
+    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
         Long manufacturerId = resultSet.getObject("manufacturer_id", Long.class);
         String manufactureName = resultSet.getObject("manufacturer_name", String.class);
         String manufacturerCountry = resultSet.getObject("manufacturer_country", String.class);
         Manufacturer manufacturer = new Manufacturer(manufactureName, manufacturerCountry);
         manufacturer.setId(manufacturerId);
-        return Optional.of(manufacturer);
+        return manufacturer;
     }
 }

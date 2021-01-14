@@ -4,8 +4,11 @@ import core.basesyntax.exceptions.DataProcessingException;
 import core.basesyntax.lib.Dao;
 import core.basesyntax.model.Manufacturer;
 import core.basesyntax.util.ConnectionUtil;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +22,8 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement(createManufacturerQuery, Statement.RETURN_GENERATED_KEYS)) {
+                        .prepareStatement(createManufacturerQuery,
+                                Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.executeUpdate();

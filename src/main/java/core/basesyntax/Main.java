@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
-        manufacturerService.create(new Manufacturer("Hyundai", "South Korea"));
+        System.out.println(manufacturerService.create(new Manufacturer("Hyundai", "South Korea")));
         manufacturerService.create(new Manufacturer("Toyota", "Japan"));
         System.out.println(manufacturerService.get(1L));
         System.out.println(manufacturerService.getAll());

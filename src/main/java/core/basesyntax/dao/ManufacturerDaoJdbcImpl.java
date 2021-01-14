@@ -29,7 +29,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject("manufacturer_id", Long.class));
+                manufacturer.setId(resultSet.getObject(1, Long.class));
             }
             return manufacturer;
         } catch (SQLException e) {

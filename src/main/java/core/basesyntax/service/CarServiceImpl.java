@@ -166,7 +166,7 @@ public class CarServiceImpl implements CarService {
             }
             return drivers;
         } catch (SQLException e) {
-            throw new DataProcessingException("qqq", e);
+            throw new DataProcessingException("Cannot get any driver by car id " + carId, e);
         }
     }
 }

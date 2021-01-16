@@ -34,7 +34,7 @@ public class CarDaoJdbcImpl implements CarDao {
             }
             return car;
         } catch (SQLException e) {
-            throw new DataProcessingException("s", e);
+            throw new DataProcessingException("Cannot create car " + car, e);
         }
     }
 
@@ -52,7 +52,7 @@ public class CarDaoJdbcImpl implements CarDao {
                 return Optional.of(getCar(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("s", e);
+            throw new DataProcessingException("Cannot get driver by id " + id, e);
         }
         return Optional.empty();
     }
@@ -143,7 +143,7 @@ public class CarDaoJdbcImpl implements CarDao {
             }
             return drivers;
         } catch (SQLException e) {
-            throw new DataProcessingException("qqq", e);
+            throw new DataProcessingException("Cannot get any driver by car id" + carId, e);
         }
     }
 }

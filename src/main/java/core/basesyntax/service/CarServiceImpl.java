@@ -49,7 +49,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void addDriverToCar(Driver driver, Car car) {
         String addDriverQuery = "INSERT INTO `cars_drivers`"
-                + "(driver_id, car_id)"
+                + " (driver_id, car_id)"
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection
@@ -66,7 +66,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        String removeDriverFromCarQuery = " DELETE FROM cars_drivers"
+        String removeDriverFromCarQuery = "DELETE FROM cars_drivers"
                 + " WHERE driver_id = ? AND car_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection
@@ -102,7 +102,7 @@ public class CarServiceImpl implements CarService {
     }
 
     private void removeAllDriversFromCar(Long id) {
-        String removeDriverFromCarQuery = " DELETE FROM cars_drivers"
+        String removeDriverFromCarQuery = "DELETE FROM cars_drivers"
                 + " WHERE car_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection

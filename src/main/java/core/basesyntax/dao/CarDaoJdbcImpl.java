@@ -40,10 +40,10 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public Optional<Car> get(Long id) {
-        String getByIdQuery = "SELECT * FROM cars c "
-                + "INNER JOIN manufacturers m ON c.manufacturer_id = m.id "
-                + " WHERE c.id = ? "
-                + "AND c.deleted = false";
+        String getByIdQuery = "SELECT * FROM cars c"
+                + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
+                + " WHERE c.id = ?"
+                + " AND c.deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(getByIdQuery)) {
             preparedStatement.setLong(1, id);
@@ -59,8 +59,8 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public List<Car> getAll() {
-        String getAllQuery = "SELECT * FROM cars c "
-                + "INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
+        String getAllQuery = "SELECT * FROM cars c"
+                + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
                 + " WHERE c.deleted = false";
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
@@ -93,7 +93,7 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteQuery = "UPDATE cars SET deleted = false WHERE id = ?";
+        String deleteQuery = "UPDATE cars SET deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
             preparedStatement.setLong(1, id);

@@ -82,9 +82,12 @@ public class CarDaoJdbcImpl implements CarDao {
         String deleteCarsDrivers = "DELETE FROM cars_drivers WHERE car_id = ?;";
         String insertCarsDrivers = "INSERT INTO cars_drivers (car_id, driver_id) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement updatePreparedStatement = connection.prepareStatement(updateQuery);
-                 PreparedStatement deletePreparedStatement = connection.prepareStatement(deleteCarsDrivers);
-                 PreparedStatement insertPreparedStatement = connection.prepareStatement(insertCarsDrivers)) {
+                 PreparedStatement updatePreparedStatement = connection
+                         .prepareStatement(updateQuery);
+                 PreparedStatement deletePreparedStatement = connection
+                         .prepareStatement(deleteCarsDrivers);
+                 PreparedStatement insertPreparedStatement = connection
+                         .prepareStatement(insertCarsDrivers)) {
             updatePreparedStatement.setLong(1, car.getManufacturer().getId());
             updatePreparedStatement.setString(2, car.getModel());
             updatePreparedStatement.setLong(3, car.getId());

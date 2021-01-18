@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String createManufacturerQuery = "INSERT INTO `manufacturers`"
+        String createManufacturerQuery = "INSERT INTO manufacturers"
                 + " (name, country)"
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();

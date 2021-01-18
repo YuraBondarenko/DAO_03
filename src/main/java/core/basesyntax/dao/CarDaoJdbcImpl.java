@@ -19,7 +19,7 @@ import java.util.Optional;
 public class CarDaoJdbcImpl implements CarDao {
     @Override
     public Car create(Car car) {
-        String query = "INSERT INTO `cars`"
+        String query = "INSERT INTO cars"
                 + " (manufacturer_id, model)"
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -108,14 +108,9 @@ public class CarDaoJdbcImpl implements CarDao {
     @Override
     public boolean delete(Long id) {
         String deleteQuery = "UPDATE cars SET deleted = true WHERE id = ?";
-        String deleteCarsDriversQuery = "DELETE FROM cars_drivers WHERE car_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
-                 PreparedStatement deleteCarsDriversPreparedStatement = connection
-                         .prepareStatement(deleteCarsDriversQuery)) {
+                 PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
             preparedStatement.setLong(1, id);
-            deleteCarsDriversPreparedStatement.setLong(1, id);
-            deleteCarsDriversPreparedStatement.executeUpdate();
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot deleted car by id " + id, e);

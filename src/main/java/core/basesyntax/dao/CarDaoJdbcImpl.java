@@ -124,9 +124,9 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        String getAllByDriverQuery = "SELECT * FROM cars_drivers cd"
-                + " INNER JOIN cars c ON cd.car_id = c.id"
-                + " INNER JOIN drivers d ON cd.driver_id = d.id"
+        String getAllByDriverQuery = "SELECT * FROM cars c"
+                + " INNER JOIN cars_drivers cd ON cd.car_id = c.id"
+                + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
                 + " WHERE cd.driver_id = ?";
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
@@ -145,33 +145,16 @@ public class CarDaoJdbcImpl implements CarDao {
 
     private Car getCar(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("c.id", Long.class);
-        Long manufacturerId = resultSet.getObject("c.manufacturer_id", Long.class);
         String model = resultSet.getObject("c.model", String.class);
-        Car car = new Car(model, getManufacturer(manufacturerId));
+        Long manufacturerId = resultSet.getObject("c.manufacturer_id", Long.class);
+        String nameManufacturer = resultSet.getObject("m.name", String.class);
+        String countryManufacturer = resultSet.getObject("m.country", String.class);
+        Manufacturer manufacturer = new Manufacturer(nameManufacturer, countryManufacturer);
+        manufacturer.setId(manufacturerId);
+        Car car = new Car(model, manufacturer);
         car.setId(id);
         car.setDrivers(getDrivers(id));
         return car;
-    }
-
-    private Manufacturer getManufacturer(Long id) {
-        String getByIdQuery = "SELECT * FROM manufacturers"
-                + " WHERE id = ?"
-                + " AND deleted = false";
-        try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(getByIdQuery)) {
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Manufacturer manufacturer = null;
-            if (resultSet.next()) {
-                String nameManufacturer = resultSet.getObject("name", String.class);
-                String countryManufacturer = resultSet.getObject("country", String.class);
-                manufacturer = new Manufacturer(nameManufacturer, countryManufacturer);
-                manufacturer.setId(id);
-            }
-            return manufacturer;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Cannot get manufacturer by id " + id, e);
-        }
     }
 
     private List<Driver> getDrivers(Long carId) {

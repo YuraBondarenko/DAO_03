@@ -1,11 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.lib.Injector;
-import core.basesyntax.model.Car;
-import core.basesyntax.model.Driver;
 import core.basesyntax.model.Manufacturer;
 import core.basesyntax.service.CarService;
-import core.basesyntax.service.DriverService;
 import core.basesyntax.service.ManufacturerService;
 
 public class Main {
@@ -75,14 +72,14 @@ public class Main {
         System.out.println(carService.getAll());
         driver1.setName("newName");
         driverService.update(driver1);*/
-        System.out.println(carService.getAll());
+        /*System.out.println(carService.getAll());
         System.out.println(carService.getAllByDriver(1L));
-        /*carService.removeDriverFromCar(driver2, carService.get(4L));*/
+        *//*carService.removeDriverFromCar(driver2, carService.get(4L));*//*
         System.out.println(carService.get(2L));
         Car car = carService.get(2L);
         car.setModel("1111111");
         carService.update(car);
-        Car car11 = carService.get(1L);
+        Car car11 = carService.get(2L);
         car11.setModel("mode123");
         carService.update(car11);
         System.out.println(carService.get(2L));
@@ -97,24 +94,26 @@ public class Main {
         Driver driver1 = driverService.get(1L);
         carService.removeDriverFromCar(driver1, car11);
         System.out.println(carService.getAllByDriver(1L));
-        System.out.println(carService.getAllByDriver(2L));
+        System.out.println(carService.getAllByDriver(2L));*/
         /*        carService.addDriverToCar(driver1, carService.get(1L));
         carService.addDriverToCar(driver1, carService.get(2L));
         carService.addDriverToCar(driver1, carService.get(3L));
         carService.addDriverToCar(driver1, carService.get(4L));*/
-        System.out.println(carService.getAllByDriver(1L));
+        /*System.out.println(carService.getAllByDriver(1L));*/
         /*        carService.removeDriverFromCar(driver1, carService.get(1L));
         carService.removeDriverFromCar(driver1, carService.get(2L));
         carService.removeDriverFromCar(driver1, carService.get(3L));
         carService.removeDriverFromCar(driver1, carService.get(4L));*/
-        System.out.println(carService.getAllByDriver(1L));
-        carService.addDriverToCar(driver1, carService.get(1L));
+        /*System.out.println(carService.getAllByDriver(1L));
+        carService.addDriverToCar(driver1, carService.get(2L));
         Driver driver2 = driverService.get(2L);
-        carService.addDriverToCar(driver2, carService.get(1L));
+        carService.addDriverToCar(driver2, carService.get(2L));
         System.out.println(carService.getAllByDriver(1L));
         System.out.println(carService.getAllByDriver(2L));
-        carService.delete(carService.get(1L).getId());
+        carService.create(car);
         System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(2L));*/
+        System.out.println(carService.get(2L));
         System.out.println(carService.getAllByDriver(2L));
     }
 }

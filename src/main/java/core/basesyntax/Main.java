@@ -96,8 +96,28 @@ public class Main {
         System.out.println(carService.getAllByDriver(1L));
         carService.delete(6L);
         System.out.println(carService.getAllByDriver(1L));
-        car11.setModel("000");
+        car11.setModel("001230");
         carService.update(car11);
         System.out.println(carService.getAllByDriver(1L));
+        carService.removeDriverFromCar(driver1, car11);
+        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(2L));
+/*        carService.addDriverToCar(driver1, carService.get(1L));
+        carService.addDriverToCar(driver1, carService.get(2L));
+        carService.addDriverToCar(driver1, carService.get(3L));
+        carService.addDriverToCar(driver1, carService.get(4L));*/
+        System.out.println(carService.getAllByDriver(1L));
+/*        carService.removeDriverFromCar(driver1, carService.get(1L));
+        carService.removeDriverFromCar(driver1, carService.get(2L));
+        carService.removeDriverFromCar(driver1, carService.get(3L));
+        carService.removeDriverFromCar(driver1, carService.get(4L));*/
+        System.out.println(carService.getAllByDriver(1L));
+        carService.addDriverToCar(driver1, carService.get(1L));
+        carService.addDriverToCar(driver2, carService.get(1L));
+        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(2L));
+        carService.delete(carService.get(1L).getId());
+        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAllByDriver(2L));
     }
 }

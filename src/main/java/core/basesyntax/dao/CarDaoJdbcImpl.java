@@ -108,9 +108,13 @@ public class CarDaoJdbcImpl implements CarDao {
     @Override
     public boolean delete(Long id) {
         String deleteQuery = "UPDATE cars SET deleted = true WHERE id = ?";
+        String deleteCarsDriversQuery = "DELETE FROM cars_drivers WHERE car_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+                 PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+                 PreparedStatement deleteCarsDriversPreparedStatement = connection.prepareStatement(deleteCarsDriversQuery)) {
             preparedStatement.setLong(1, id);
+            deleteCarsDriversPreparedStatement.setLong(1, id);
+            deleteCarsDriversPreparedStatement.executeUpdate();
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot deleted car by id " + id, e);

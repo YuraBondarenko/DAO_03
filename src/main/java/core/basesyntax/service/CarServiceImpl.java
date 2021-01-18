@@ -39,40 +39,19 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean delete(Long id) {
-        removeAllDriversFromCar(id);
         return carDao.delete(id);
     }
 
     @Override
     public void addDriverToCar(Driver driver, Car car) {
-        String addDriverQuery = "INSERT INTO `cars_drivers`"
-                + " (driver_id, car_id)"
-                + " VALUES (?, ?)";
-        try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection
-                         .prepareStatement(addDriverQuery)) {
-            preparedStatement.setLong(1, driver.getId());
-            preparedStatement.setLong(2, car.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DataProcessingException("Cannot add driver " + driver + " to car" + car, e);
-        }
+        car.getDrivers().add(driver);
+        carDao.update(car);
     }
 
     @Override
     public void removeDriverFromCar(Driver driver, Car car) {
-        String removeDriverFromCarQuery = "DELETE FROM cars_drivers"
-                + " WHERE driver_id = ? AND car_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection
-                         .prepareStatement(removeDriverFromCarQuery)) {
-            preparedStatement.setLong(1, driver.getId());
-            preparedStatement.setLong(2, car.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DataProcessingException("Cannot remove driver " + driver
-                    + " from car " + car, e);
-        }
+        car.getDrivers().remove(driver);
+        carDao.update(car);
     }
 
     @Override

@@ -1,15 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.CarDao;
-import core.basesyntax.exceptions.DataProcessingException;
 import core.basesyntax.lib.Inject;
 import core.basesyntax.lib.Service;
 import core.basesyntax.model.Car;
 import core.basesyntax.model.Driver;
-import core.basesyntax.util.ConnectionUtil;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -57,18 +52,5 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAllByDriver(Long driverId) {
         return carDao.getAllByDriver(driverId);
-    }
-
-    private void removeAllDriversFromCar(Long id) {
-        String removeDriverFromCarQuery = "DELETE FROM cars_drivers"
-                + " WHERE car_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection
-                         .prepareStatement(removeDriverFromCarQuery)) {
-            preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DataProcessingException("Cannot delete all drivers from car by " + id, e);
-        }
     }
 }

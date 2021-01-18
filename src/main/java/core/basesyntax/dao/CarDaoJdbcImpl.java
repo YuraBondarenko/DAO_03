@@ -111,7 +111,8 @@ public class CarDaoJdbcImpl implements CarDao {
         String deleteCarsDriversQuery = "DELETE FROM cars_drivers WHERE car_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
-                 PreparedStatement deleteCarsDriversPreparedStatement = connection.prepareStatement(deleteCarsDriversQuery)) {
+                 PreparedStatement deleteCarsDriversPreparedStatement = connection
+                         .prepareStatement(deleteCarsDriversQuery)) {
             preparedStatement.setLong(1, id);
             deleteCarsDriversPreparedStatement.setLong(1, id);
             deleteCarsDriversPreparedStatement.executeUpdate();

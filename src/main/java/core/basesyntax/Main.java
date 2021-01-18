@@ -83,8 +83,18 @@ public class Main {
         driver1.setName("newName");
         driverService.update(driver1);*/
         System.out.println(carService.getAll());
-        System.out.println(carService.getAllByDriver(2L));
+        System.out.println(carService.getAllByDriver(1L));
         /*carService.removeDriverFromCar(driver2, carService.get(4L));*/
-        System.out.println(carService.getAllByDriver(2L));
+        System.out.println(carService.get(2L));
+        Car car = carService.get(2L);
+        car.setModel("1111111");
+        carService.update(car);
+        Car car11 = carService.get(1L);
+        car11.setModel("mode123");
+        carService.update(car11);
+        System.out.println(carService.get(2L));
+        System.out.println(carService.getAllByDriver(1L));
+        carService.delete(6L);
+        System.out.println(carService.getAllByDriver(1L));
     }
 }

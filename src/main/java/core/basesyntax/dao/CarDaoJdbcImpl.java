@@ -105,9 +105,9 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        String getAllByDriverQuery = "SELECT * FROM taxi_service.cars_drivers cd"
-                + " INNER JOIN taxi_service.cars c ON cd.car_id = c.id"
-                + " INNER JOIN taxi_service.drivers d ON cd.driver_id = d.id"
+        String getAllByDriverQuery = "SELECT * FROM cars_drivers cd"
+                + " INNER JOIN cars c ON cd.car_id = c.id"
+                + " INNER JOIN drivers d ON cd.driver_id = d.id"
                 + " WHERE cd.driver_id = ?";
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();

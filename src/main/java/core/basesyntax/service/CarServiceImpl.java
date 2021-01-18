@@ -34,6 +34,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car update(Car car) {
+        removeAllDriversFromCar(car.getId());
+        for (int i = 0; i < car.getDrivers().size(); i++) {
+            addDriverToCar(car.getDrivers().get(i), car);
+        }
         return carDao.update(car);
     }
 
@@ -54,8 +58,6 @@ public class CarServiceImpl implements CarService {
             preparedStatement.setLong(1, driver.getId());
             preparedStatement.setLong(2, car.getId());
             preparedStatement.executeUpdate();
-            get(car.getId()).getDrivers().add(driver);
-            update(car);
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot add driver " + driver + " to car" + car, e);
         }

@@ -95,7 +95,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete manufacturer by id " + id, e);
+            throw new DataProcessingException("Can't delete driver by id " + id, e);
         }
     }
 

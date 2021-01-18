@@ -43,7 +43,7 @@ public class CarDaoJdbcImpl implements CarDao {
         String getByIdQuery = "SELECT * FROM cars c"
                 + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
                 + " WHERE c.id = ?"
-                + " AND c.deleted = false";
+                + " AND c.deleted = false AND m.deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(getByIdQuery)) {
             preparedStatement.setLong(1, id);
@@ -61,7 +61,7 @@ public class CarDaoJdbcImpl implements CarDao {
     public List<Car> getAll() {
         String getAllQuery = "SELECT * FROM cars c"
                 + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
-                + " WHERE c.deleted = false";
+                + " WHERE c.deleted = false AND m.deleted = false";
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(getAllQuery)) {
@@ -127,7 +127,7 @@ public class CarDaoJdbcImpl implements CarDao {
         String getAllByDriverQuery = "SELECT * FROM cars c"
                 + " INNER JOIN cars_drivers cd ON cd.car_id = c.id"
                 + " INNER JOIN manufacturers m ON c.manufacturer_id = m.id"
-                + " WHERE cd.driver_id = ?";
+                + " WHERE cd.driver_id = ? AND m.deleted = false";
         List<Car> cars = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection
@@ -162,7 +162,7 @@ public class CarDaoJdbcImpl implements CarDao {
         String getDriversQuery = "SELECT * FROM taxi_service.cars_drivers  cd"
                 + " INNER JOIN taxi_service.cars c ON cd.car_id = c.id"
                 + " INNER JOIN taxi_service.drivers d ON cd.driver_id = d.id"
-                + " WHERE cd.car_id = ?";
+                + " WHERE cd.car_id = ? AND d.deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection
                          .prepareStatement(getDriversQuery)) {

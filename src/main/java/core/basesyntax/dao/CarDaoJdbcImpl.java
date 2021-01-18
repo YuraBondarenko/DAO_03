@@ -79,12 +79,23 @@ public class CarDaoJdbcImpl implements CarDao {
     public Car update(Car car) {
         String updateQuery = "UPDATE cars SET manufacturer_id = ?,"
                 + " model = ? WHERE id = ? AND deleted = false";
+        String deleteCarsDrivers = "DELETE FROM cars_drivers WHERE car_id = ?;";
+        String insertCarsDrivers = "INSERT INTO cars_drivers (car_id, driver_id) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-            preparedStatement.setLong(1, car.getManufacturer().getId());
-            preparedStatement.setString(2, car.getModel());
-            preparedStatement.setLong(3, car.getId());
-            preparedStatement.executeUpdate();
+                 PreparedStatement updatePreparedStatement = connection.prepareStatement(updateQuery);
+                 PreparedStatement deletePreparedStatement = connection.prepareStatement(deleteCarsDrivers);
+                 PreparedStatement insertPreparedStatement = connection.prepareStatement(insertCarsDrivers)) {
+            updatePreparedStatement.setLong(1, car.getManufacturer().getId());
+            updatePreparedStatement.setString(2, car.getModel());
+            updatePreparedStatement.setLong(3, car.getId());
+            updatePreparedStatement.executeUpdate();
+            deletePreparedStatement.setLong(1, car.getId());
+            deletePreparedStatement.executeUpdate();
+            insertPreparedStatement.setLong(1, car.getId());
+            for (Driver driver : car.getDrivers()) {
+                insertPreparedStatement.setLong(2, driver.getId());
+                insertPreparedStatement.executeUpdate();
+            }
             return car;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot update car " + car, e);

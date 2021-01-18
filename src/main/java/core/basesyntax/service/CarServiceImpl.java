@@ -34,10 +34,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car update(Car car) {
-        removeAllDriversFromCar(car.getId());
-        for (int i = 0; i < car.getDrivers().size(); i++) {
-            addDriverToCar(car.getDrivers().get(i), car);
-        }
         return carDao.update(car);
     }
 

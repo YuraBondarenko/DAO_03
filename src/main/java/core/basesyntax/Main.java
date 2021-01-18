@@ -96,5 +96,8 @@ public class Main {
         System.out.println(carService.getAllByDriver(1L));
         carService.delete(6L);
         System.out.println(carService.getAllByDriver(1L));
+        car11.setModel("000");
+        carService.update(car11);
+        System.out.println(carService.getAllByDriver(1L));
     }
 }

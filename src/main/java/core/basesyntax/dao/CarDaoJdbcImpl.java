@@ -93,12 +93,12 @@ public class CarDaoJdbcImpl implements CarDao {
             updatePreparedStatement.setString(2, car.getModel());
             updatePreparedStatement.setLong(3, car.getId());
             updatePreparedStatement.executeUpdate();
-            deleteFromCarsDrivers(car);
-            insertIntoCarsDrivers(car);
-            return car;
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot update car " + car, e);
         }
+        deleteFromCarsDrivers(car);
+        insertIntoCarsDrivers(car);
+        return car;
     }
 
     @Override
@@ -148,7 +148,7 @@ public class CarDaoJdbcImpl implements CarDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot delete car " + car
-                    + " from table cars_delete", e);
+                    + " from table cars_drivers", e);
         }
     }
 
@@ -165,7 +165,7 @@ public class CarDaoJdbcImpl implements CarDao {
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot insert car " + car
-                    + " into table cars_delete", e);
+                    + " into table cars_drivers", e);
         }
     }
 
@@ -193,9 +193,9 @@ public class CarDaoJdbcImpl implements CarDao {
             preparedStatement.setLong(1, carId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String name = resultSet.getObject("d.name", String.class);
-                String licenceNumber = resultSet.getObject("d.licenceNumber", String.class);
-                Long driverId = resultSet.getObject("d.id", Long.class);
+                String name = resultSet.getObject("name", String.class);
+                String licenceNumber = resultSet.getObject("licenceNumber", String.class);
+                Long driverId = resultSet.getObject("id", Long.class);
                 Driver driver = new Driver(name, licenceNumber);
                 driver.setId(driverId);
                 drivers.add(driver);

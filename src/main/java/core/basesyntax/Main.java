@@ -1,7 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.lib.Injector;
-import core.basesyntax.model.Manufacturer;
+import core.basesyntax.service.CarService;
+import core.basesyntax.service.DriverService;
 import core.basesyntax.service.ManufacturerService;
 
 public class Main {
@@ -10,13 +11,12 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
-        System.out.println(manufacturerService.create(new Manufacturer("Hyundai", "South Korea")));
-        manufacturerService.create(new Manufacturer("Toyota", "Japan"));
-        System.out.println(manufacturerService.get(1L));
-        System.out.println(manufacturerService.getAll());
-        System.out.println(manufacturerService.update(new Manufacturer(1L, "newToyota", "Japan")));
-        System.out.println(manufacturerService.get(1L));
-        manufacturerService.delete(2L);
-        System.out.println(manufacturerService.getAll());
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+        CarService carService = (CarService)
+                injector.getInstance(CarService.class);
+        System.out.println(carService.get(2L));
+        System.out.println(carService.getAllByDriver(2L));
+        System.out.println(carService.getAllByDriver(1L));
+        System.out.println(carService.getAll());
     }
 }

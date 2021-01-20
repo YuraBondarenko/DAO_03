@@ -79,6 +79,7 @@ public class CarDaoJdbcImpl implements CarDao {
         for (Car car : cars) {
             car.setDrivers(getDrivers(car.getId()));
         }
+        cars.sort((i1, i2) -> (int) (i1.getId() - i2.getId()));
         return cars;
     }
 

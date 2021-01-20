@@ -21,7 +21,7 @@ public class CarDaoJdbcImpl implements CarDao {
     public Car create(Car car) {
         String query = "INSERT INTO cars"
                 + " (manufacturer_id, model)"
-                + " VALUES (?, ?)";
+                + " VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection
                          .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {

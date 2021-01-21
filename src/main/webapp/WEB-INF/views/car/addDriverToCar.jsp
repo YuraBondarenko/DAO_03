@@ -6,8 +6,6 @@
 <body>
 <h1>Enter data for adding driver to car</h1>
 
-<h2 style="color:red">${message}</h2>
-
 <form method="post" action="${pageContext.request.contextPath}/cars/drivers/add">
     Enter driver id: <input type="number" name="driverId" required>
     Enter car id: <input type="number" name="carId" required>

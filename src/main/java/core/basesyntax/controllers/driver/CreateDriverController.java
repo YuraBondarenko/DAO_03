@@ -3,7 +3,6 @@ package core.basesyntax.controllers.driver;
 import core.basesyntax.lib.Injector;
 import core.basesyntax.model.Driver;
 import core.basesyntax.service.DriverService;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

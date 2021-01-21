@@ -3,7 +3,6 @@ package core.basesyntax.controllers.manufacturer;
 import core.basesyntax.lib.Injector;
 import core.basesyntax.model.Manufacturer;
 import core.basesyntax.service.ManufacturerService;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

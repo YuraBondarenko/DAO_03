@@ -26,20 +26,11 @@ public class AddDriverToCarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String driverId = req.getParameter("driverId");
-        String carId = req.getParameter("carId");
-        if (driverId.isEmpty() || carId.isEmpty()) {
-            req.setAttribute("message", "ID must contains only digits.");
-            req.getRequestDispatcher("/WEB-INF/views/car/create.jsp").forward(req, resp);
-        }
-        if (!driverId.chars().allMatch(Character::isDigit)
-                || !carId.chars().allMatch(Character::isDigit)) {
-            req.setAttribute("message", "ID must contains only digits.");
-            req.getRequestDispatcher("/WEB-INF/views/car/create.jsp").forward(req, resp);
-        }
-        Car car = carService.get(Long.valueOf(carId));
-        Driver driver = driverService.get(Long.valueOf(driverId));
+        Long driverId = Long.valueOf(req.getParameter("driverId"));
+        Long carId = Long.valueOf(req.getParameter("carId"));
+        Car car = carService.get(carId);
+        Driver driver = driverService.get(driverId);
         carService.addDriverToCar(driver, car);
-        resp.sendRedirect(req.getContextPath() + "/cars/all");
+        resp.sendRedirect(req.getContextPath() + "/cars");
     }
 }

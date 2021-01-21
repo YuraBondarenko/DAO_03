@@ -3,6 +3,7 @@ package core.basesyntax.controllers.manufacturer;
 import core.basesyntax.lib.Injector;
 import core.basesyntax.model.Manufacturer;
 import core.basesyntax.service.ManufacturerService;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CreateManufacturerController extends HttpServlet {
-    private static Injector injector = Injector.getInstance("core.basesyntax");
+    private static final Injector injector = Injector.getInstance("core.basesyntax");
     private ManufacturerService manufacturerService = (ManufacturerService) injector
             .getInstance(ManufacturerService.class);
 
@@ -25,13 +26,7 @@ public class CreateManufacturerController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String country = req.getParameter("country");
-
-        if (name.isEmpty() || country.isEmpty()) {
-            req.setAttribute("message", "Input data cannot be empty.");
-            req.getRequestDispatcher("/WEB-INF/views/manufacturer/create.jsp").forward(req, resp);
-        } else {
-            manufacturerService.create(new Manufacturer(name, country));
-            resp.sendRedirect(req.getContextPath() + "/manufacturers/all");
-        }
+        manufacturerService.create(new Manufacturer(name, country));
+        resp.sendRedirect(req.getContextPath() + "/manufacturers");
     }
 }

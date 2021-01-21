@@ -9,8 +9,8 @@
 <h2 style="color:red">${message}</h2>
 
 <form method="post" action="${pageContext.request.contextPath}/drivers/create">
-    Enter name: <input type="text" name="name">
-    Enter licence number: <input type="text" name="licenceNumber">
+    Enter name: <input type="text" name="name" required>
+    Enter licence number: <input type="text" name="licenceNumber" required>
 
     <button type="submit">Add driver</button>
 </form>

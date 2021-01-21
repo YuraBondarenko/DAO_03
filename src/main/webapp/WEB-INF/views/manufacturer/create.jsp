@@ -9,8 +9,8 @@
 <h2 style="color:red">${message}</h2>
 
 <form method="post" action="${pageContext.request.contextPath}/manufacturers/create">
-    Enter name: <input type="text" name="name">
-    Enter country: <input type="text" name="country">
+    Enter name: <input type="text" name="name" required>
+    Enter country: <input type="text" name="country" required>
     <button type="submit">Add manufacturer</button>
 </form>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>

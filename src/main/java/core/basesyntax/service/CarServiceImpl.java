@@ -24,7 +24,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getAll() {
-        return carDao.getAll();
+        List<Car> cars = carDao.getAll();
+        cars.sort((i1, i2) -> (int) (i1.getId() - i2.getId()));
+        return cars;
     }
 
     @Override

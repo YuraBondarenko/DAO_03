@@ -48,7 +48,6 @@
         <url-pattern>/drivers/create</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>addManufacturer</servlet-name>
         <servlet-class>core.basesyntax.controllers.manufacturer.CreateManufacturerController</servlet-class>

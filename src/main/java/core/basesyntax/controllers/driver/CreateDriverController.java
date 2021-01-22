@@ -29,6 +29,10 @@ public class CreateDriverController extends HttpServlet {
         Driver driver = new Driver(name, licenceNumber);
         driver.setLogin(login);
         driver.setPassword(password);
+        if (driverService.findByLogin(login).isPresent()) {
+            req.setAttribute("message", "Login is already taken");
+            req.getRequestDispatcher("/WEB-INF/views/driver/create.jsp").forward(req, resp);
+        }
         driverService.create(driver);
         resp.sendRedirect(req.getContextPath() + "/drivers");
     }

@@ -18,13 +18,15 @@ public class DriverDaoJdbcImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers"
-                + " (name, licenceNumber)"
-                + " VALUES (?, ?)";
+                + " (name, licenceNumber, login, password)"
+                + " VALUES (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query,
                          Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenceNumber());
+            preparedStatement.setString(3, driver.getLogin());
+            preparedStatement.setString(4, driver.getPassword());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -49,6 +51,24 @@ public class DriverDaoJdbcImpl implements DriverDao {
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get driver by id " + id, e);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Driver> findByLogin(String login) {
+        String findByLoginQuery = "SELECT * FROM drivers WHERE login = ?"
+                + " AND deleted = false";
+        try (Connection connection = ConnectionUtil.getConnection();
+                 PreparedStatement preparedStatement = connection
+                         .prepareStatement(findByLoginQuery)) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.of(getDriver(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't get driver by login " + login, e);
         }
         return Optional.empty();
     }
@@ -103,7 +123,11 @@ public class DriverDaoJdbcImpl implements DriverDao {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getObject("name", String.class);
         String licenceNumber = resultSet.getObject("licenceNumber", String.class);
+        String login = resultSet.getObject("login", String.class);
+        String password = resultSet.getObject("password", String.class);
         Driver driver = new Driver(name, licenceNumber);
+        driver.setLogin(login);
+        driver.setPassword(password);
         driver.setId(id);
         return driver;
     }

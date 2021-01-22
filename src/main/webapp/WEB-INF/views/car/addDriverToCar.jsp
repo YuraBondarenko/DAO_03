@@ -12,5 +12,7 @@
     <button type="submit">Add driver to car</button>
 </form>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
+<a href="${pageContext.request.contextPath}/cars">Show all cars</a>
+<a href="${pageContext.request.contextPath}/drivers">Show all drivers</a>
 </body>
 </html>

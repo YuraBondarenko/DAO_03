@@ -13,6 +13,9 @@
     Enter password: <input type="password" name="password" required>
     <button type="submit">Add driver</button>
 </form>
+<a href="${pageContext.request.contextPath}/login">Authentication</a>
+<p></p>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
+<a href="${pageContext.request.contextPath}/manufacturers">Show all drivers</a>
 </body>
 </html>

@@ -60,6 +60,7 @@ public class Driver {
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", licenceNumber='" + licenceNumber + '\''
+                + ", login='" + login + '\''
                 + '}';
     }
 
@@ -75,7 +76,8 @@ public class Driver {
         return Objects.equals(id, driver.id)
                 && Objects.equals(name, driver.name)
                 && Objects.equals(licenceNumber, driver.licenceNumber)
-                && Objects.equals(login, driver.login);
+                && Objects.equals(login, driver.login)
+                && Objects.equals(password, driver.password);
     }
 
     @Override

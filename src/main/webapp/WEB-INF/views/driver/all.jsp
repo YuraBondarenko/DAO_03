@@ -26,9 +26,9 @@
             <td>
                 <c:out value="${driver.licenceNumber}"/>
             </td>
-            <th>
+            <td>
                 <c:out value="${driver.login}"/>
-            </th>
+            </td>
             <td>
                 <a href="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}">Delete</a>
             </td>
@@ -36,5 +36,6 @@
     </c:forEach>
 </table>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
+<a href="${pageContext.request.contextPath}/drivers/create">Create new driver</a>
 </body>
 </html>

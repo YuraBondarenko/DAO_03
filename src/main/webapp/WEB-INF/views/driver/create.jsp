@@ -18,6 +18,6 @@
 <a href="${pageContext.request.contextPath}/login">Authentication</a>
 <p></p>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
-<a href="${pageContext.request.contextPath}/manufacturers">Show all drivers</a>
+<a href="${pageContext.request.contextPath}/drivers">Show all drivers</a>
 </body>
 </html>

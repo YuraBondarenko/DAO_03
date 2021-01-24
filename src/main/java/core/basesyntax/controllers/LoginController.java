@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("core.basesyntax");
     private static final String DRIVER_ID = "id";
-    private final AuthenticationService authenticationService = (AuthenticationService) injector
+    private AuthenticationService authenticationService = (AuthenticationService) injector
             .getInstance(AuthenticationService.class);
 
     @Override

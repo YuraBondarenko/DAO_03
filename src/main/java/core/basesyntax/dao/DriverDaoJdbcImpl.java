@@ -124,10 +124,8 @@ public class DriverDaoJdbcImpl implements DriverDao {
         String name = resultSet.getObject("name", String.class);
         String licenceNumber = resultSet.getObject("licenceNumber", String.class);
         String login = resultSet.getObject("login", String.class);
-        String password = resultSet.getObject("password", String.class);
         Driver driver = new Driver(name, licenceNumber);
         driver.setLogin(login);
-        driver.setPassword(password);
         driver.setId(id);
         return driver;
     }

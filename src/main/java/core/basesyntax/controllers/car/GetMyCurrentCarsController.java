@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetMyCurrentCarsController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("core.basesyntax");
     private static final String DRIVER_ID = "id";
-    private CarService carService = (CarService) injector.getInstance(CarService.class);
+    private final CarService carService = (CarService) injector.getInstance(CarService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -4,8 +4,8 @@ import core.basesyntax.lib.Inject;
 import core.basesyntax.lib.Service;
 import core.basesyntax.model.Driver;
 import core.basesyntax.service.DriverService;
-import javax.naming.AuthenticationException;
 import java.util.Optional;
+import javax.naming.AuthenticationException;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {

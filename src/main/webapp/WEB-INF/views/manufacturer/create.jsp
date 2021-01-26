@@ -12,5 +12,6 @@
     <button type="submit">Add manufacturer</button>
 </form>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
+<a href="${pageContext.request.contextPath}/manufacturers">Show all manufacturers</a>
 </body>
 </html>

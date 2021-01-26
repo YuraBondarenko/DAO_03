@@ -50,3 +50,9 @@ ADD CONSTRAINT `cars_drivers_cars_fk`
   REFERENCES `taxi_service`.`cars` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+ALTER TABLE `drivers`
+    ADD COLUMN `login` VARCHAR(225) NOT NULL AFTER `licenceNumber`,
+ADD COLUMN `password` VARCHAR(225) NOT NULL AFTER `login`,
+ADD UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE;
+;

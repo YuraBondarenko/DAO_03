@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CreateCarController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("core.basesyntax");
-    private CarService carService = (CarService) injector.getInstance(CarService.class);
-    private ManufacturerService manufacturerService = (ManufacturerService) injector
+    private final CarService carService = (CarService) injector.getInstance(CarService.class);
+    private final ManufacturerService manufacturerService = (ManufacturerService) injector
             .getInstance(ManufacturerService.class);
 
     @Override

@@ -36,5 +36,6 @@
     </c:forEach>
 </table>
 <a href="${pageContext.request.contextPath}/">Go to the main page</a>
+<a href="${pageContext.request.contextPath}/cars/create">Create new car</a>
 </body>
 </html>
